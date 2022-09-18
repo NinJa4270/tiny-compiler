@@ -1,13 +1,4 @@
-export enum TokenTypes {
-  Paren,
-  Name,
-  Number,
-}
-type Token = {
-  type: TokenTypes;
-  value: string;
-};
-type Tokens = Token[];
+import { TokenTypes, Tokens } from "./types";
 
 export function tokenizer(code: string) {
   const tokens: Tokens = [];

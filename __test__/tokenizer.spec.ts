@@ -1,5 +1,6 @@
 import { test, expect } from "vitest";
-import { TokenTypes, tokenizer } from "../src/tokenizer";
+import { tokenizer } from "../src/tokenizer";
+import { TokenTypes } from "../src/types";
 
 test("paren", () => {
   const code = `(`;
