@@ -43,7 +43,7 @@ function createStringNode(value: string): ASTStringNode {
   };
 }
 
-export function transformer(ast: RootNode) {
+export function transformer(ast: RootNode): ASTRoot {
   const newAst: ASTRoot = {
     type: NodeTypes.Program,
     body: [],
