@@ -16,7 +16,7 @@ function createCallExpressionNode(name: string): ASTCallExpressionNode {
       type: NodeTypes.Identifier,
       name,
     },
-    arguments: [],
+    args: [],
   };
 }
 
@@ -57,7 +57,7 @@ export function transformer(ast: RootNode) {
         if (node.type === NodeTypes.CallExpression) {
           let callExpressionNode: ASTCallExpressionNode | ASTStatementNode =
             createCallExpressionNode(node.name);
-          node.context = callExpressionNode.arguments;
+          node.context = callExpressionNode.args;
           if (parent?.type !== NodeTypes.CallExpression) {
             callExpressionNode = createStatementNode(callExpressionNode);
           }

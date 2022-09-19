@@ -60,25 +60,33 @@ export type Visitor = {
   [key in NodeTypes]?: VisitorItem;
 };
 
-export interface ASTCallee {
+export interface ASTIdentifier {
   type: NodeTypes.Identifier;
   name: string;
 }
 
-type ASTChildNode =
+export type ASTChildNode =
   | ASTNumberNode
   | ASTCallExpressionNode
   | ASTNumberNode
   | ASTStringNode;
+
+export type ASTNode = ASTRoot | ASTIdentifier | ASTStatementNode | ASTChildNode;
+
 export interface ASTCallExpressionNode {
   type: NodeTypes.CallExpression;
-  callee: ASTCallee;
-  arguments: ASTChildNode[];
+  callee: ASTIdentifier;
+  args: ASTChildNode[];
 }
 
 export interface ASTStatementNode {
   type: NodeTypes.Statement;
   expression: ASTCallExpressionNode;
+}
+
+export interface ASTI {
+  type: NodeTypes.NumberLiteral;
+  value: string;
 }
 
 export interface ASTNumberNode {

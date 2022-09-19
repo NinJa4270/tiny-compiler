@@ -42,7 +42,7 @@ test("transformer", () => {
             type: NodeTypes.Identifier,
             name: "add",
           },
-          arguments: [
+          args: [
             {
               type: NodeTypes.NumberLiteral,
               value: "2",
@@ -53,7 +53,7 @@ test("transformer", () => {
                 type: NodeTypes.Identifier,
                 name: "subtract",
               },
-              arguments: [
+              args: [
                 {
                   type: NodeTypes.StringLiteral,
                   value: "abc",
