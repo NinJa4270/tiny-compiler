@@ -5,6 +5,7 @@ import {
   RootNode,
   NumberNode,
   CallExpressionNode,
+  StringNode,
 } from "./types";
 
 function createRootNode(): RootNode {
@@ -17,6 +18,13 @@ function createRootNode(): RootNode {
 function createNumberNode(value: string): NumberNode {
   return {
     type: NodeTypes.NumberLiteral,
+    value: value,
+  };
+}
+
+function createStringNode(value: string): StringNode {
+  return {
+    type: NodeTypes.StringLiteral,
     value: value,
   };
 }
@@ -39,6 +47,11 @@ export function parser(tokens: Tokens) {
     if (token.type === TokenTypes.Number) {
       current++;
       return createNumberNode(token.value);
+    }
+
+    if (token.type === TokenTypes.String) {
+      current++;
+      return createStringNode(token.value);
     }
 
     if (token.type === TokenTypes.Paren && token.value === "(") {

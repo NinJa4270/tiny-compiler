@@ -19,7 +19,10 @@ export function traverser(rootNode: RootNode, visitor: Visitor) {
     visitorItem && visitorItem.enter(node, parentNode);
     switch (node.type) {
       case NodeTypes.NumberLiteral:
-        console.log(node);
+        // console.log(node);
+        break;
+      case NodeTypes.StringLiteral:
+        // console.log(node);
         break;
       case NodeTypes.CallExpression:
         traverserChilds(node.params, node);

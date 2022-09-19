@@ -2,6 +2,7 @@ export enum TokenTypes {
   Paren = "paren",
   Name = "name",
   Number = "number",
+  String = "string",
 }
 export type Token = {
   type: TokenTypes;
@@ -12,6 +13,7 @@ export type Tokens = Token[];
 export enum NodeTypes {
   NumberLiteral = "NumberLiteral",
   CallExpression = "CallExpression",
+  StringLiteral = "StringLiteral",
   Program = "Program",
 }
 
@@ -19,7 +21,7 @@ export interface Node {
   type: NodeTypes;
 }
 
-export type ChildNode = NumberNode | CallExpressionNode;
+export type ChildNode = NumberNode | StringNode | CallExpressionNode;
 
 export interface RootNode extends Node {
   type: NodeTypes.Program;
@@ -28,6 +30,11 @@ export interface RootNode extends Node {
 
 export interface NumberNode extends Node {
   type: NodeTypes.NumberLiteral;
+  value: string;
+}
+
+export interface StringNode extends Node {
+  type: NodeTypes.StringLiteral;
   value: string;
 }
 

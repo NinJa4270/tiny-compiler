@@ -18,6 +18,29 @@ test("numberNode", () => {
   expect(parser(tokens)).toEqual(ast);
 });
 
+test("stringNode", () => {
+  const tokens = [
+    { type: TokenTypes.String, value: "abc" },
+    { type: TokenTypes.String, value: "def" },
+  ];
+
+  const ast = {
+    type: NodeTypes.Program,
+    body: [
+      {
+        type: NodeTypes.StringLiteral,
+        value: "abc",
+      },
+      {
+        type: NodeTypes.StringLiteral,
+        value: "def",
+      },
+    ],
+  };
+
+  expect(parser(tokens)).toEqual(ast);
+});
+
 test("callExpressionNode", () => {
   const tokens = [
     { type: TokenTypes.Paren, value: "(" },
@@ -108,8 +131,8 @@ test("parser", () => {
     { type: TokenTypes.Number, value: "2" },
     { type: TokenTypes.Paren, value: "(" },
     { type: TokenTypes.Name, value: "subtract" },
-    { type: TokenTypes.Number, value: "4" },
-    { type: TokenTypes.Number, value: "2" },
+    { type: TokenTypes.String, value: "abc" },
+    { type: TokenTypes.String, value: "def" },
     { type: TokenTypes.Paren, value: ")" },
     { type: TokenTypes.Paren, value: ")" },
   ];
@@ -130,12 +153,12 @@ test("parser", () => {
             name: "subtract",
             params: [
               {
-                type: NodeTypes.NumberLiteral,
-                value: "4",
+                type: NodeTypes.StringLiteral,
+                value: "abc",
               },
               {
-                type: NodeTypes.NumberLiteral,
-                value: "2",
+                type: NodeTypes.StringLiteral,
+                value: "def",
               },
             ],
           },

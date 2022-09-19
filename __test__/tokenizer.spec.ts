@@ -20,16 +20,25 @@ test("number", () => {
   expect(tokenizer(code)).toEqual(tokens);
 });
 
+test("string", () => {
+  const code = `"abc" "def"`;
+  const tokens = [
+    { type: TokenTypes.String, value: "abc" },
+    { type: TokenTypes.String, value: "def" },
+  ];
+  expect(tokenizer(code)).toEqual(tokens);
+});
+
 test("tokenizer", () => {
-  const code = `(add 2 (subtract 4 2))`;
+  const code = `(add 2 (subtract "abc" "def"))`;
   const tokens = [
     { type: TokenTypes.Paren, value: "(" },
     { type: TokenTypes.Name, value: "add" },
     { type: TokenTypes.Number, value: "2" },
     { type: TokenTypes.Paren, value: "(" },
     { type: TokenTypes.Name, value: "subtract" },
-    { type: TokenTypes.Number, value: "4" },
-    { type: TokenTypes.Number, value: "2" },
+    { type: TokenTypes.String, value: "abc" },
+    { type: TokenTypes.String, value: "def" },
     { type: TokenTypes.Paren, value: ")" },
     { type: TokenTypes.Paren, value: ")" },
   ];

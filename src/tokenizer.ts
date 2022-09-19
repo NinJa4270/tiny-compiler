@@ -5,13 +5,8 @@ export function tokenizer(code: string) {
   let current = 0;
   while (current < code.length) {
     let char = code[current];
-    const WhiteSpaceTest = /\s/;
 
-    if (WhiteSpaceTest.test(char)) {
-      current++;
-      continue;
-    }
-
+    // ( )
     if (char === "(") {
       tokens.push({
         type: TokenTypes.Paren,
@@ -30,6 +25,46 @@ export function tokenizer(code: string) {
       continue;
     }
 
+    // whitespace
+    const WhiteSpaceTest = /\s/;
+    if (WhiteSpaceTest.test(char)) {
+      current++;
+      continue;
+    }
+
+    // number
+    const NumberTest = /[0-9]/;
+    if (NumberTest.test(char)) {
+      let value = "";
+      while (NumberTest.test(char) && current < code.length) {
+        value += char;
+        char = code[++current];
+      }
+      tokens.push({
+        type: TokenTypes.Number,
+        value,
+      });
+      continue;
+    }
+
+    // string
+    if (char === '"') {
+      let value = "";
+      char = code[++current];
+
+      while (char !== '"' && current < code.length) {
+        value += char;
+        char = code[++current];
+      }
+      char = code[++current];
+      tokens.push({
+        type: TokenTypes.String,
+        value,
+      });
+      continue;
+    }
+
+    // callExpression name
     const LetterTest = /[a-z]/i;
     if (LetterTest.test(char)) {
       let value = "";
@@ -42,21 +77,10 @@ export function tokenizer(code: string) {
         type: TokenTypes.Name,
         value,
       });
+      continue;
     }
 
-    const NumberTest = /[0-9]/;
-    if (NumberTest.test(char)) {
-      let value = "";
-      while (NumberTest.test(char) && current < code.length) {
-        value += char;
-        char = code[++current];
-      }
-
-      tokens.push({
-        type: TokenTypes.Number,
-        value,
-      });
-    }
+    throw new TypeError(`char:${char}`);
   }
 
   return tokens;

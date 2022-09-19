@@ -19,12 +19,12 @@ test("traverser", () => {
             name: "subtract",
             params: [
               {
-                type: NodeTypes.NumberLiteral,
-                value: "4",
+                type: NodeTypes.StringLiteral,
+                value: "abc",
               },
               {
-                type: NodeTypes.NumberLiteral,
-                value: "2",
+                type: NodeTypes.StringLiteral,
+                value: "def",
               },
             ],
           },
@@ -61,6 +61,15 @@ test("traverser", () => {
         callArr.push(["numberLiteral-exit", node.type, parent!.type]);
       },
     },
+
+    StringLiteral: {
+      enter(node, parent) {
+        callArr.push(["stringLiteral-enter", node.type, parent!.type]);
+      },
+      exit(node, parent) {
+        callArr.push(["stringLiteral-exit", node.type, parent!.type]);
+      },
+    },
   };
 
   traverser(ast, visitor);
@@ -74,10 +83,10 @@ test("traverser", () => {
       NodeTypes.CallExpression,
       NodeTypes.CallExpression,
     ],
-    ["numberLiteral-enter", NodeTypes.NumberLiteral, NodeTypes.CallExpression],
-    ["numberLiteral-exit", NodeTypes.NumberLiteral, NodeTypes.CallExpression],
-    ["numberLiteral-enter", NodeTypes.NumberLiteral, NodeTypes.CallExpression],
-    ["numberLiteral-exit", NodeTypes.NumberLiteral, NodeTypes.CallExpression],
+    ["stringLiteral-enter", NodeTypes.StringLiteral, NodeTypes.CallExpression],
+    ["stringLiteral-exit", NodeTypes.StringLiteral, NodeTypes.CallExpression],
+    ["stringLiteral-enter", NodeTypes.StringLiteral, NodeTypes.CallExpression],
+    ["stringLiteral-exit", NodeTypes.StringLiteral, NodeTypes.CallExpression],
     ["callExpression-exit", NodeTypes.CallExpression, NodeTypes.CallExpression],
     ["callExpression-exit", NodeTypes.CallExpression, NodeTypes.Program],
     ["program-exit", NodeTypes.Program, ""],
