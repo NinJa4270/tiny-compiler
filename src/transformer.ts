@@ -2,6 +2,7 @@ import { traverser } from "./traverser";
 import {
   ASTCallExpressionNode,
   ASTNumberNode,
+  ASTRoot,
   ASTStatementNode,
   ASTStringNode,
   NodeTypes,
@@ -43,7 +44,7 @@ function createStringNode(value: string): ASTStringNode {
 }
 
 export function transformer(ast: RootNode) {
-  const newAst = {
+  const newAst: ASTRoot = {
     type: NodeTypes.Program,
     body: [],
   };

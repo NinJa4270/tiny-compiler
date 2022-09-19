@@ -65,10 +65,15 @@ export interface ASTCallee {
   name: string;
 }
 
+type ASTChildNode =
+  | ASTNumberNode
+  | ASTCallExpressionNode
+  | ASTNumberNode
+  | ASTStringNode;
 export interface ASTCallExpressionNode {
   type: NodeTypes.CallExpression;
   callee: ASTCallee;
-  arguments: ASTNumberNode[];
+  arguments: ASTChildNode[];
 }
 
 export interface ASTStatementNode {
@@ -84,4 +89,9 @@ export interface ASTNumberNode {
 export interface ASTStringNode {
   type: NodeTypes.StringLiteral;
   value: string;
+}
+
+export interface ASTRoot {
+  type: NodeTypes.Program;
+  body: ASTStatementNode[];
 }

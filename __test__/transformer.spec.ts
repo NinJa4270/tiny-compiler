@@ -1,7 +1,7 @@
 import { test, expect } from "vitest";
 import { transformer } from "../src/transformer";
-import { NodeTypes, RootNode } from "../src/types";
-test("tst", () => {
+import { ASTRoot, NodeTypes, RootNode } from "../src/types";
+test("transformer", () => {
   const originAst: RootNode = {
     type: NodeTypes.Program,
     body: [
@@ -31,7 +31,7 @@ test("tst", () => {
       },
     ],
   };
-  const ast = {
+  const ast: ASTRoot = {
     type: NodeTypes.Program,
     body: [
       {
